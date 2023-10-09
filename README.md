@@ -74,12 +74,12 @@
 
 |Métrica                   | Significado Alto | Significado Baixo |
 |--------------------------|------------------|--------------------|
-|**P/L**     | Sobrevalorizada | Subvalorizada |
-|**P/VP** | Sobrevalorizada | Subvalorizada |
-|**PSR** | Sobrevalorizada | Subvalorizada |
-|**DY**   | Alto retorno em dividendos | Baixo retorno em dividendos |
-|**P/Ativo** | Sobrevalorizada | Subvalorizada |
-|**P/Cap.Giro** | Sobrevalorizada | Subvalorizada |
+|**P/L**                    | Sobrevalorizada | Subvalorizada |
+|**P/VP**                   | Sobrevalorizada | Subvalorizada |
+|**PSR**                    | Sobrevalorizada | Subvalorizada |
+|**DY**                     | Alto retorno em dividendos | Baixo retorno em dividendos |
+|**P/Ativo**                | Sobrevalorizada | Subvalorizada |
+|**P/Cap.Giro**             | Sobrevalorizada | Subvalorizada |
 |**P/EBIT**   | Sobrevalorizada | Subvalorizada |
 |**P/ACL** | Sobrevalorizada | Subvalorizada |
 |**EV/EBIT** | Sobrevalorizada | Subvalorizada |
