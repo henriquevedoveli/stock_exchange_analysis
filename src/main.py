@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from view import *
 from scraper import *
+from utils import *
 
 # TODO Refatorar
 # TODO Tirar qualquer logica daqui
@@ -9,9 +10,14 @@ from scraper import *
 def main():
     global valores_desejados, entry_values
 
-    scrapper = StockScraper()
+    try:
+        data = DataLoad().data
+        
+    except:
+        scrapper = StockScraper()
+        data = scrapper.data
 
-    view = View(scrapper.data)
+    view = View(data)
 
     root = tk.Tk()
     root.title("Stock Analysis")

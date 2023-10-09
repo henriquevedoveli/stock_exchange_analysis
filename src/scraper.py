@@ -3,7 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 class StockScraper:
-    def __init__(self, url = 'http://www.fundamentus.com.br/resultado.php', path_acoes_listadas='acoes-listadas.csv'):
+    def __init__(self, url = 'http://www.fundamentus.com.br/resultado.php', path_acoes_listadas='data/acoes-listadas.csv'):
         self.url = url
         self.data = None
 
