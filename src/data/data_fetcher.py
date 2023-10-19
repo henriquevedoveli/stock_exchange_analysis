@@ -1,8 +1,10 @@
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
+from dataclasses import dataclass
 
-class StockScraper:
+
+class Scraper:
     def __init__(self, url = 'http://www.fundamentus.com.br/resultado.php', path_acoes_listadas='data/acoes-listadas.csv'):
         self.url = url
         self.data = None
@@ -59,3 +61,26 @@ class StockScraper:
 
         df = pd.DataFrame(data_list)
         self.data = df[df['Papel'].isin(acoes)]
+
+
+class API:
+    def __init__(self) -> None:
+        self.base_url = 'https://brapi.dev/api/'
+        self.endpoint = 'quote/list'
+        self.token = '5WnCxU3sJKmjXBZKMnUX8u'
+
+    def get_data(self):
+        url = f"{self.base_url}{self.endpoint}?token={self.token}"
+
+        try:
+            response = requests.get(url)
+            response.raise_for_status()  
+
+            self.data = response.json()
+
+        except Exception as error:
+            print("ERROR - Could not get the data", str(error))
+
+
+api = API()
+data = api.get_data()

@@ -1,3 +1,27 @@
+Este projeto esta divido em duas partes:
+
+1. Análise de oportunidades de compras de ações:
+    Realizar a filtragem de possíveis oportunidades de compras para ações da B3.
+
+    a. Os dados podem ser obtidos de três maneiras:
+        * Scrapping da página `fundamentus.com.br/resultado.php`
+        * Requisição na API `https://brapi.dev/api/quote/list` 
+        * Utilizando um arquivo `data.csv`
+
+        Para este projeto estou utilizando a primeira maneira, já que a página da fundamentus tem mais informações.
+
+    b. Os dados são tratados e filtrados utilizando `pandas` e `numpy`.
+
+    c. A interface gráfica é construida utilizando `tkinter`.
+
+2. Análise de oportunidades de venda de ações (Working In Progress):
+    Realizar a filtragem de possíveis oportunidades de vendas para ações que foram compradas.
+
+    a. Pretendo utilizar o banco de dados `TinyDB` para guardar as informações de compra.
+    b. Pretendo utilizar o `tkinter` para construir outra aba de venda.
+
+---
+
 1. **P/L (Preço/Lucro)**:
    - **Fórmula**: P/L = Preço da ação / Lucro por ação
    - O P/L é a relação entre o preço da ação no mercado e o lucro por ação da empresa. Indica quantas vezes o preço da ação está em relação ao lucro gerado por cada ação.
@@ -72,53 +96,23 @@
     - Indica o crescimento percentual acumulado ao longo dos últimos 5 anos em alguma métrica específica (pode variar, por exemplo, lucro, receita, etc.).
 
 
-|Métrica                   | Significado Alto | Significado Baixo |
-|--------------------------|------------------|--------------------|
-|**P/L**                    | Sobrevalorizada | Subvalorizada |
-|**P/VP**                   | Sobrevalorizada | Subvalorizada |
-|**PSR**                    | Sobrevalorizada | Subvalorizada |
-|**DY**                     | Alto retorno em dividendos | Baixo retorno em dividendos |
-|**P/Ativo**                | Sobrevalorizada | Subvalorizada |
-|**P/Cap.Giro**             | Sobrevalorizada | Subvalorizada |
-|**P/EBIT**   | Sobrevalorizada | Subvalorizada |
-|**P/ACL** | Sobrevalorizada | Subvalorizada |
-|**EV/EBIT** | Sobrevalorizada | Subvalorizada |
-|**EV/EBITDA** | Sobrevalorizada | Subvalorizada |
-|**Margem EBIT** | Eficiência operacional alta | Eficiência operacional baixa |
-|**Margem Líquida** | Boa eficiência em lucro líquido | Menor eficiência em lucro líquido |
-|**Liquidez Corrente** | Boa capacidade de cobrir obrigações de curto prazo | Menor capacidade de cobrir obrigações de curto prazo |
-|**ROIC** | Boa taxa de retorno sobre capital investido | Menor taxa de retorno sobre capital investido |
-|**ROE** | Boa taxa de retorno sobre patrimônio líquido | Menor taxa de retorno sobre patrimônio líquido |
-|**Pat.Liq.** | Alta liquidez em 2 meses | Baixa liquidez em 2 meses |
-|**Div.Brut/Pat.** | Maior alavancagem financeira | Menor alavancagem financeira |
-|**Cresc.5anos** | Alto crescimento em 5 anos | Baixo crescimento em 5 anos |
-
-
-**Métricas a serem utilizadas**
-
-1. **P/L (Preço/Lucro)**: Dê preferência a ações com P/L baixo, indicando um preço mais baixo em relação aos lucros, o que pode ser uma oportunidade de compra.
-
-2. **P/VP (Preço/Valor Patrimonial)**: Procure ações com P/VP baixo, indicando um preço mais baixo em relação ao valor patrimonial, sinalizando possíveis oportunidades de compra.
-
-3. **PSR (Preço/Sales Ratio)**: Prefira ações com PSR baixo, indicando um preço mais baixo em relação à receita líquida, o que pode sugerir uma possível subvalorização.
-
-4. **P/Ativo (Preço/Ativo)**: Concentre-se em ações com P/Ativo baixo, indicando um preço mais baixo em relação ao valor total dos ativos da empresa, o que pode indicar uma oportunidade de compra.
-
-5. **P/Cap.Giro (Preço/Capital de Giro)**: Procure ações com P/Cap.Giro baixo, indicando um preço mais baixo em relação ao capital de giro, sinalizando possíveis oportunidades de compra.
-
-6. **Margem EBIT (Mrg.Ebit - Margem Operacional)**: Busque ações com alta margem EBIT, indicando eficiência operacional, o que pode ser um sinal positivo para uma possível compra.
-
-7. **ROIC (Return on Invested Capital)**: Prefira ações com ROIC mais alto, indicando uma boa taxa de retorno sobre o capital investido, o que pode ser um indicador positivo para compra.
-
-
-|Métrica                | Sinal para Compra | Sinal para Venda |
-|-----------------------|-------------------|------------------|
-|**P/L (Preço/Lucro)**  | Baixo (Oportunidade de compra) | Alto (Possível venda) |
-|**P/VP (Preço/Valor Patrimonial)** | Baixo (Oportunidade de compra) | Alto (Possível venda) |
-|**PSR (Preço/Sales Ratio)** | Baixo (Oportunidade de compra) | Alto (Possível venda) |
-|**P/Ativo (Preço/Ativo)** | Baixo (Oportunidade de compra) | Alto (Possível venda) |
-|**P/Cap.Giro (Preço/Capital de Giro)** | Baixo (Oportunidade de compra) | Alto (Possível venda) |
-|**Margem EBIT (Mrg.Ebit - Margem Operacional)** | Alta (Oportunidade de compra) | Baixa (Possível venda) |
-|**ROIC (Return on Invested Capital)** | Alto (Oportunidade de compra) | Baixo (Possível venda) |
-
-Essas são as interpretações concisas para ajudar na sua estratégia de swing trade, com foco nas métricas que você deseja considerar para compra ou venda. Lembre-se de que é essencial também considerar a análise técnica, gerenciamento de riscos e outras informações do mercado ao tomar suas decisões de investimento.
+|Métrica                   | Significado Alto                  | Significado Baixo                 | Sinal para Compra                | Sinal para Venda                 |
+|--------------------------|----------------------------------|------------------------------------|----------------------------------|---------------------------------|
+|**P/L**                    | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**P/VP**                   | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**PSR**                    | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**DY**                     | Alto retorno em dividendos      | Baixo retorno em dividendos       |                                 |                                 |
+|**P/Ativo**                | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**P/Cap.Giro**             | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**P/EBIT**                 | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**P/ACL**                  | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**EV/EBIT**                | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**EV/EBITDA**              | Sobrevalorizada                 | Subvalorizada                     | Baixo (Oportunidade de compra)   | Alto (Possível venda)          |
+|**Margem EBIT**            | Eficiência operacional alta     | Eficiência operacional baixa     | Alta (Oportunidade de compra)    | Baixa (Possível venda)         |
+|**Margem Líquida**         | Boa eficiência em lucro líquido  | Menor eficiência em lucro líquido |                                 |                                 |
+|**Liquidez Corrente**      | Boa capacidade de cobrir obrigações de curto prazo | Menor capacidade de cobrir obrigações de curto prazo |  | |
+|**ROIC**                   | Boa taxa de retorno sobre capital investido | Menor taxa de retorno sobre capital investido | Alto (Oportunidade de compra) | Baixo (Possível venda) |
+|**ROE**                    | Boa taxa de retorno sobre patrimônio líquido | Menor taxa de retorno sobre patrimônio líquido | | |
+|**Pat.Liq.**               | Alta liquidez em 2 meses         | Baixa liquidez em 2 meses         | | |
+|**Div.Brut/Pat.**          | Maior alavancagem financeira      | Menor alavancagem financeira      | | |
+|**Cresc.5anos**           | Alto crescimento em 5 anos       | Baixo crescimento em 5 anos       | | |

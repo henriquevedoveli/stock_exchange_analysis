@@ -1,24 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
-from view import *
-from scraper import *
-from utils import *
+from view import View
+from data.data_process import Scrapper_Processor
+from pandas import DataFrame
 
-# TODO Refatorar
-# TODO Tirar qualquer logica daqui
+def create_gui(data: DataFrame) -> None:
+    """
+    Create a GUI interface to display stock analysis data.
 
-def main():
-    global valores_desejados, entry_values
+    Args:
+        data (DataFrame): The data to display.
 
-    try:
-        data = DataLoad().data
-        
-    except:
-        scrapper = StockScraper()
-        data = scrapper.data
-
-    view = View(data)
-
+    Returns:
+        None
+    """
     root = tk.Tk()
     root.title("Stock Analysis")
     root.configure(bg="#f0f0f0")
@@ -29,21 +24,31 @@ def main():
     frame_metrics = ttk.Frame(notebook)
     notebook.add(frame_metrics, text='Métricas')
 
-    valores_desejados = [
-        "Cotacao", "P/VP", "PSR", "DY", "P/Ativo", "P/Cap.Giro", "P/EBIT", "P/ACL", "EV/EBIT", "EV/EBITDA",
-        "Mrg.Ebit", "Mrg.Liq.", "Liq.Corr.", "ROIC", "ROE", "Liq.2meses", "Pat.Liq", "Div.Brut/Pat.", "Cresc.5anos"
-    ]
-
+    valores_desejados = data.columns
     entry_values = []
+
+    view = View(data)
     view.create_metrics_tab(frame_metrics, valores_desejados, entry_values)
-
-    frame_explanation = ttk.Frame(notebook)
-    notebook.add(frame_explanation, text='Explicação')
-
-    view.create_explanation_tab(frame_explanation)
     view.create_buttons(root, valores_desejados, entry_values)
 
     root.mainloop()
 
+def main(gui: bool = False) -> None:
+    """
+    Main function to process and display stock analysis data.
+
+    Args:
+        gui (bool, optional): If True, display a GUI interface. Defaults to False.
+
+    Returns:
+        None
+    """
+    processor = Scrapper_Processor()
+    data: DataFrame = processor.build_data_frame()
+    processor.process(data)
+
+    if gui:
+        create_gui(data)
+
 if __name__ == "__main__":
-    main()
+    main(gui=True)
