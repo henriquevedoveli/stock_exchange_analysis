@@ -1,16 +1,12 @@
-import tkinter as tk
-from tkinter import Label, Entry, ttk
-from tkinter import messagebox
 from metrics import Metrics
+from tkinter import Label, Entry, ttk
+import tkinter as tk
 
-#TODO Mostrar o dataframe com os filtros
-# TODO Refatorar
 
-class View:
+class MetricsTab:
     def __init__(self, df) -> None:
-        self.df = df
         self.metrics = Metrics()
-
+        self.df = df
 
     def create_metrics_tab(self, frame_metrics, valores_desejados, entry_values):
         for index, valor in enumerate(valores_desejados):
@@ -21,19 +17,14 @@ class View:
             entry.grid(row=index, column=1, sticky="w", padx=(0, 10), pady=5)
             entry_values.append(entry)
 
+        self.create_dataframe_button(frame_metrics, valores_desejados, entry_values)
 
-
-    def create_buttons(self, root, valores_desejados, entry_values):
+    def create_dataframe_button(self, root, valores_desejados, entry_values):
         def show_dataframe():
             self.display_dataframe(valores_desejados, entry_values)
 
         show_table_button = tk.Button(root, text="Show DataFrame", command=show_dataframe, bg="#4CAF50", fg="white", padx=10, pady=5)
-        show_table_button.pack(pady=(0, 10))
-
-        exit_button = tk.Button(root, text="Exit", command=root.destroy, bg="#FF5733", fg="white", padx=10, pady=5)
-
-        exit_button.pack(pady=(0, 10))
-
+        show_table_button.grid(row=len(valores_desejados)+1, columnspan=2, padx=10, pady=10)
 
     def display_dataframe(self, valores_desejados, entry_values):
         entry_values_new = []
