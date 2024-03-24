@@ -49,7 +49,7 @@ class ScrapperProcessor:
     Classe para processar dados de um web scraper.
     """
 
-    def build_data_frame(self, file_path="data/data.csv"):
+    def build_data_frame(self, file_path):
         """
         Constrói um DataFrame a partir de um arquivo CSV ou realiza o scraping se o arquivo não existir.
 
@@ -61,7 +61,8 @@ class ScrapperProcessor:
         """
         try:
             return pd.read_csv(file_path)
-        except FileNotFoundError:
+        
+        except:
             print("*** Fetching the Data...")
             scrapper = Scraper()
             data = scrapper.data

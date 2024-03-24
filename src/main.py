@@ -15,7 +15,7 @@ def main(gui: bool = False) -> None:
         None
     """
     processor = ScrapperProcessor()
-    data: DataFrame = processor.build_data_frame()
+    data: DataFrame = processor.build_data_frame("data/data.csv")
     processor.process(data)
 
     if gui:
